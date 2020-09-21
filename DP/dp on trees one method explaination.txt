@@ -1,0 +1,20 @@
+1st of all let us root the tree at any arbitrary node(say node 1).
+Let's define
+dp1(u,x) = number of nodes that have a distance x from u.
+dp2(u,x) = number of nodes that have a distance x from u and lie in the subtree rooted at node u.
+
+Now our ans is simply going to be sum of dp1(i, k) where i = 1 to N.
+Calculating dp2(u,x) should be trivial.
+
+dp2(u,x) = summation dp2(c, x-1) where c is a child of u.
+dp2(u,0) = 1.
+
+Now comparatively harder part is calculating dp1.
+
+For the root node : dp1(root, x) = dp2(root, x).
+Now For node u (u is not the root): dp1(u, x) = dp2(u,x) + {dp1(parent[u], x-1) — dp2(u, x-2)}
+
+Explanation :
+
+dp1(u, x) is obvious when u = root. dp1(u, x) will be the number of nodes in the tree that are at distance x from u. dp1(u, x) consists of nodes that may be in the subtree rooted at node u or may not be. dp2(u, x) gets us all nodes at dis x from u and in subtree of u. now we now only need to add nodes at distance x but not in subtree of u. we know number of nodes at dis x-1 from parent of u and u is at dis 1 from u. all these nodes need to be counted except for those nodes which are in the subtree rooted at u, so take all these but subtract dp2(u, x-2) as dp1(parent[u], x-1) = sum dp1(c, x-2) over all c.
+question:-https://codeforces.com/problemset/problem/161/D

@@ -1,0 +1,8 @@
+ll POW(ll a,ll b,ll mod){
+	if(b==0) return 1%mod;
+	else{
+		ll tmp = POW(a,b/2,mod)%mod;
+		if(b%2==0) return (tmp%mod*tmp%mod)%mod;
+		else return ((a%mod*(tmp%mod*tmp%mod)%mod))%mod;
+	}
+}
